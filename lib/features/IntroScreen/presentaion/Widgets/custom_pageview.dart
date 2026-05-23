@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:untitled1/const/colors.dart';
 class MyCustomPage extends StatelessWidget {
   const MyCustomPage({super.key, required this.showRow, required this.controller, required this.mainImage, required this.titlePage, required this.describePage, required this.onPress, });
   final String mainImage;
@@ -39,7 +40,7 @@ class MyCustomPage extends StatelessWidget {
           ),
           SizedBox(height: 20,),
           InkWell(onTap: onPress ,child: Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(7),color: Color.fromRGBO(214, 19, 85, 1),),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(7),color: AppColors.Primary,),
             height: 57,
             width: 157,
 
@@ -67,7 +68,7 @@ class MyCustomPage extends StatelessWidget {
                 controller: controller, // نفس الكنترولر بتاع الـ PageView
                 count: 2,
                 effect: JumpingDotEffect( // هناك أشكال كثيرة مثل Worm, Slide, ExpandingDot
-                  activeDotColor: Color(0xFFD81B60),
+                  activeDotColor: AppColors.Primary,
                   dotColor: Color(0xFFE0E0E0),
                   dotHeight: 10,
                   dotWidth: 10,
@@ -75,7 +76,7 @@ class MyCustomPage extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 1),
-                child: showRow ? IconButton(onPressed: onPress, icon: Icon(Icons.arrow_forward,color: Color.fromRGBO(214, 19, 85, 1),)) : SizedBox(),
+                child: showRow ? IconButton(onPressed: onPress, icon: Icon(Icons.arrow_forward,color: AppColors.Primary,)) : SizedBox(),
               ),
             ],
           ),
