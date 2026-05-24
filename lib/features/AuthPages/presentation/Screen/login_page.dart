@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:untitled1/const/colors.dart';
 import 'package:untitled1/features/AuthPages/presentation/Widget/login.dart';
 import 'package:untitled1/features/AuthPages/presentation/Widget/sign_up.dart';
+
+import '../../../../core/Colors/colors.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

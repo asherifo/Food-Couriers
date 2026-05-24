@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../const/colors.dart';
+import 'package:untitled1/core/Widgets/custom_button.dart';
+import 'package:untitled1/core/Widgets/google_custom_buttom.dart';
+
+import '../../../../core/Colors/colors.dart';
 import '../../Logic/auth_cubit.dart';
 import '../../Logic/auth_state.dart';
 
@@ -26,9 +29,9 @@ class _SignupScreenState extends State<MyCustomCreateAcc> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthCubit(),
-      child: Scaffold(
-
-        body: SingleChildScrollView(
+      child: SizedBox(
+//height: 600,
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child: Form(
             key: _formKey,
@@ -71,71 +74,21 @@ class _SignupScreenState extends State<MyCustomCreateAcc> {
                   builder: (context, state) {
                     return state is AuthLoading
                         ? const CircularProgressIndicator()
-                        : InkWell(
-                      onTap: () {
-                        if (_formKey.currentState!.validate()) {
-                          context.read<AuthCubit>().signupUser(
-                              _nameController.text,
-                              _emailController.text,
-                              _passwordController.text
-                          );
-                          Navigator.pushReplacementNamed(context, '/Profile');
-                        }
+                    : MyCustomButton(title: 'Sign up', width: 300, onPress: (){
+                      if (_formKey.currentState!.validate()) {
+                              context.read<AuthCubit>().signupUser(
+                                  _nameController.text,
+                                  _emailController.text,
+                                  _passwordController.text
+                              );
+                              Navigator.pushReplacementNamed(context, '/Profile');
+                            }
 
-                      },
-                      child: Container(
-                        width:300,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: AppColors.Primary,
-                          borderRadius: BorderRadius.circular(7),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Login",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
+                    });
                   },
                 ),
                 SizedBox(height: 20),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 300,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(244, 244, 244, 1),
-                      borderRadius: BorderRadius.circular(7),
-                    ),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Image.asset(
-                            "assets/images/google.png",
-                            height: 20,
-                            width: 20,
-                          ),
-                          Text(
-                            "Login with Google",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight(700),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                GoogleCustomButtom(title:'Sign up with Google',onPress: (){},),
                 SizedBox(height: 20,)
               ],
             ),

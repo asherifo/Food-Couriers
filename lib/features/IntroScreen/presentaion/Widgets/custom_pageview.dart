@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:untitled1/const/colors.dart';
+
+
+import '../../../../core/Colors/colors.dart';
 class MyCustomPage extends StatelessWidget {
   const MyCustomPage({super.key, required this.showRow, required this.controller, required this.mainImage, required this.titlePage, required this.describePage, required this.onPress, });
   final String mainImage;

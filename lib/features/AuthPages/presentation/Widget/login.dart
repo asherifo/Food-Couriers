@@ -1,7 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../const/colors.dart';
+import 'package:untitled1/core/Widgets/custom_button.dart';
+import 'package:untitled1/core/Widgets/custom_textformf.dart';
+import '../../../../core/Colors/colors.dart';
+import '../../../../core/Widgets/google_custom_buttom.dart';
 import '../../Logic/auth_cubit.dart';
 import '../../Logic/auth_state.dart';
 
@@ -38,45 +41,25 @@ class _LoginScreenState extends State<MyCustomLoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                CustomTextformf(lTxt: 'UserName', controller: _usernameController, validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please Enter your Name';
+                  }
+                  return null;
+                }, icon: Icon(Icons.person_outline)),
 
-                TextFormField(
-                  controller: _usernameController,
-                  decoration: const InputDecoration(
-                    labelText: 'UserName',
-                    border: UnderlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
-                    prefixIcon: Icon(Icons.person_outline),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please Enter your Name';
-                    }
-                    return null;
-                  },
-                ),
                 const SizedBox(height: 16),
+                CustomTextformf(lTxt: 'Password', controller: _passwordController, validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please Enter your Password';
+                  }
+                  return null;
+                }, icon: Icon(Icons.password),),
 
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-
-                    labelText: 'Password',
-                    border: UnderlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
-                    prefixIcon: Icon(Icons.password),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please Enter your Password';
-                    }
-                    return null;
-                  },
-                ),
                 const SizedBox(height: 24),
-
                 BlocConsumer<AuthCubit, AuthState>(
                   listener: (context, state) {
                     if (state is LoginSuccess) {
-
                       String name = state.userData['firstName'] ?? 'User';
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -84,10 +67,8 @@ class _LoginScreenState extends State<MyCustomLoginPage> {
                           backgroundColor: Colors.green,
                         ),
                       );
-
-                       Navigator.pushReplacementNamed(context, '/Profile');
+                      Navigator.pushReplacementNamed(context, '/Profile');
                     }
-
                     if (state is AuthFailure) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -98,78 +79,26 @@ class _LoginScreenState extends State<MyCustomLoginPage> {
                     }
                   },
                   builder: (context, state) {
-
                     if (state is AuthLoading) {
                       return const CircularProgressIndicator();
                     }
-
                     return SizedBox(
-                      // width: double.infinity,
                       height: 60,
-                      child: InkWell(
-                        onTap: () {
-                          if (_formKey.currentState!.validate()) {
-                            context.read<AuthCubit>().loginUser(
-                              _usernameController.text.trim(),
-                              _passwordController.text.trim(),
-                            );
-                          }
-                        },
-                        child:  Container(
-                          width:300,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            color: AppColors.Primary,
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "Login",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
+                      child: MyCustomButton(title: 'Login', width: 300, onPress: (){
+                        if (_formKey.currentState!.validate()) {
+                                context.read<AuthCubit>().loginUser(
+                                  _usernameController.text.trim(),
+                                  _passwordController.text.trim(),
+                                );
+                              }
+                      }
                       ),
                     );
-
                   },
                 ),
-            SizedBox(height: 20),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                width: 300,
-                height: 60,
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(244, 244, 244, 1),
-                  borderRadius: BorderRadius.circular(7),
-                ),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Image.asset(
-                        "assets/images/google.png",
-                        height: 20,
-                        width: 20,
-                      ),
-                      Text(
-                        "Login with Google",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight(700),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+                SizedBox(height: 20),
+                GoogleCustomButtom(title:'Login with Google',onPress: (){},),
+
               ],
             ),
           ),
