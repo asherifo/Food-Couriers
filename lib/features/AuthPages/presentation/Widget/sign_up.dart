@@ -27,9 +27,7 @@ class _SignupScreenState extends State<MyCustomCreateAcc> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthCubit(),
-      child: SizedBox(
+    return  SizedBox(
 //height: 600,
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
@@ -94,7 +92,7 @@ class _SignupScreenState extends State<MyCustomCreateAcc> {
             ),
           ),
         ),
-      ),
+
     );
   }
 }

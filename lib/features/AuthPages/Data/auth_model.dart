@@ -41,7 +41,7 @@ class AuthService {
       return response.data;
 
     } on DioException catch (e) {
-      String errorMessage = e.response?.data['message'] ?? "فشل إنشاء الحساب، حاول مجدداً";
+      String errorMessage = e.response?.data['message'] ?? "Action field Please Try Again ! ً";
       throw errorMessage;
     }
   }

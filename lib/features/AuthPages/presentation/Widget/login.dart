@@ -30,9 +30,7 @@ class _LoginScreenState extends State<MyCustomLoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthCubit(),
-      child: Scaffold(
+    return  Scaffold(
 
         body: Padding(
           padding: const EdgeInsets.only(right: 15,left: 15),
@@ -64,10 +62,10 @@ class _LoginScreenState extends State<MyCustomLoginPage> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('Welcome $name Now you are Logged!'),
-                          backgroundColor: Colors.green,
+                          backgroundColor: AppColors.Primary,
                         ),
                       );
-                      Navigator.pushReplacementNamed(context, '/Profile');
+                      Navigator.pushNamed(context, '/Menu',arguments: state.userId);
                     }
                     if (state is AuthFailure) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -103,7 +101,7 @@ class _LoginScreenState extends State<MyCustomLoginPage> {
             ),
           ),
         ),
-      ),
+
     );
   }
 }
