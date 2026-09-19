@@ -1,4 +1,4 @@
-# 🍕 Foodie Express
+# 🍕 Food Couriers
 > A modern food delivery application with smooth animations, dynamic search, and responsive design — built with Flutter.
 > 
 ![Flutter](https://img.shields.io/badge/Flutter-02569B?style=flat&logo=flutter&logoColor=white)
